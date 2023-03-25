@@ -29,6 +29,8 @@ class PurchaseBookCommand extends Command
     }
 
     /**
+     * Defines number of books per each book volume
+     *
      * @return void
      */
     protected function configure(): void
@@ -41,6 +43,14 @@ class PurchaseBookCommand extends Command
 
     }
 
+    /**
+     * retrieves the passed arguments into an array and passed it to Book Service for processing
+     *
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return int
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $items = [

@@ -37,7 +37,10 @@ class BooksDiscountMachine implements DiscountMachineInterface
     }
 
     /**
+     * sorts array in ascending order and removes null values
+     *
      * @param array $items
+     *
      * @return array
      */
     private function cleanupCartItems(array $items): array
@@ -46,6 +49,13 @@ class BooksDiscountMachine implements DiscountMachineInterface
         return array_filter($items);
     }
 
+    /**
+     * calculates total price after discount
+     *
+     * @param $volumes
+     *
+     * @return float|int
+     */
     private function calculatePrice($volumes): float|int
     {
         $totalPrice = $volumes * self::BOOK_PRICE;

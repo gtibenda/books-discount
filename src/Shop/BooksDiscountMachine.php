@@ -5,6 +5,7 @@ namespace App\Shop;
 class BooksDiscountMachine implements DiscountMachineInterface
 {
     private const BOOK_PRICE = 8;
+    private const CURRENCY   = '€';
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class BooksDiscountMachine implements DiscountMachineInterface
             $totalPrice += ($cartItems[0] * self::BOOK_PRICE);
         }
 
-        return sprintf('The discounted price is %s €', $totalPrice);
+        return sprintf('The discounted price is %s %s', $totalPrice, self::CURRENCY);
 
     }
 

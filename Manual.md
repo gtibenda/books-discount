@@ -8,7 +8,7 @@ System requirements:
 
 ### Steps
 - Download the project from the given github link
-- Git checkout to branch ``` master ```
+- Git checkout to branch ``` main ```
 - Run ``` composer install ```
 - Then Run ```  php bin/console  app:calculate-discount 1 1 1 1 1 ```
 

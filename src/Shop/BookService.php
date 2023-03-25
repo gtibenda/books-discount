@@ -15,8 +15,8 @@ class BookService
         return new BookTransaction($items);
     }
 
-    public function calculateDiscount($items): string
+    public function calculateDiscount($items): float
     {
-        return $this->discountMachine->execute($this->prepareTransaction($items));
+        return $this->discountMachine->execute($this->prepareTransaction($items))->getAmount();
     }
 }

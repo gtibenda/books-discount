@@ -7,21 +7,22 @@ namespace App\Shop;
 class BooksDiscountMachine implements DiscountMachineInterface
 {
     private const BOOK_PRICE = 8;
-    private const CURRENCY   = '€';
+    public const CURRENCY   = '€';
+
+    public float $totalPrice = 0;
 
     /**
      * @inheritDoc
      */
-    public function execute(BookTransactionInterface $purchaseTransaction): string
+    public function execute(BookTransactionInterface $purchaseTransaction): BooksDiscountMachine
     {
-        $totalPrice  = 0;
         $isMoreBookTypes = true;
 
         $cartItems = $this->cleanupCartItems($purchaseTransaction->getItemQuantity());
         $volumes   = count($cartItems);
 
         while ($isMoreBookTypes) {
-            $totalPrice += $this->calculatePrice($volumes);
+            $this->totalPrice += $this->calculatePrice($volumes);
             $newCartItems = array_map(static function ($cartItem) {
                 return $cartItem - 1;
             }, $cartItems);
@@ -32,11 +33,15 @@ class BooksDiscountMachine implements DiscountMachineInterface
             }
         }
         if(!empty($cartItems)) {
-            $totalPrice += ($cartItems[0] * self::BOOK_PRICE);
+            $this->totalPrice += ($cartItems[0] * self::BOOK_PRICE);
         }
 
-        return sprintf('The discounted price is %s %s', $totalPrice, self::CURRENCY);
+        return $this;
+    }
 
+    public function getAmount(): float
+    {
+        return $this->totalPrice;
     }
 
     /**

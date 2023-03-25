@@ -6,6 +6,7 @@ namespace App\Command;
 
 
 
+use App\Shop\BooksDiscountMachine;
 use App\Shop\BookService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -63,7 +64,10 @@ class PurchaseBookCommand extends Command
             $input->getArgument('quantity5')
         ];
         ;
-        $output->writeln($this->bookService->calculateDiscount($items));
+        $output->writeln(
+            sprintf('The discounted price is %s %s',
+                $this->bookService->calculateDiscount($items), BooksDiscountMachine::CURRENCY)
+        );
 
         return Command::SUCCESS;
     }

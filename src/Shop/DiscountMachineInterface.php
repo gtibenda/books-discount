@@ -12,7 +12,7 @@ interface DiscountMachineInterface
      *
      * @param BookTransactionInterface $purchaseTransaction
      *
-     * @return string
+     * @return BooksDiscountMachine
      */
-    public function execute(BookTransactionInterface $purchaseTransaction): string;
+    public function execute(BookTransactionInterface $purchaseTransaction): BooksDiscountMachine;
 }
